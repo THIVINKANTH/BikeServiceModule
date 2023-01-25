@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/BikeServiceModule.git/static/css/main.7fd864da.css",
+    "main.js": "/BikeServiceModule.git/static/js/main.804cb6cc.js",
+    "index.html": "/BikeServiceModule.git/index.html",
+    "main.7fd864da.css.map": "/BikeServiceModule.git/static/css/main.7fd864da.css.map",
+    "main.804cb6cc.js.map": "/BikeServiceModule.git/static/js/main.804cb6cc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7fd864da.css",
+    "static/js/main.804cb6cc.js"
+  ]
+}
