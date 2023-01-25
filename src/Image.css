@@ -1,0 +1,11 @@
+#Center
+{
+    background-image: linear-gradient(yellow,green);
+}
+#Center2
+{
+    background-image: linear-gradient(blue,pink);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-decoration: underline red;
+}
