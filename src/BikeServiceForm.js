@@ -6,11 +6,12 @@ import './Image.css'
 export let Register=()=>
 {
     const[process,setProcess]=useState({
-        "cusId":"",
+        "cusId":0,
+        "cusBikeno":"",
         "cusName":"",
         "cusContact":"",
         "cusEmail":"",
-        "cusDate":""
+        "Dateofpurchase":""
     })
     const track=(data)=>
     {
@@ -39,7 +40,7 @@ export let Register=()=>
         <div className="container bg-info">
             <div className="row justify-content-center">
                 <div className="col-lg-8 col-md-0 col-sm-12 shadow-lg p-3" id="Center">
-                <h3 className="text-center mt-5 mb-5"id="Center2"><img src="./service.png" id="Center1"/>Bike Details Form</h3>
+                <h3 className="text-center mt-5 mb-5"id="Center2">Bike Details Form</h3>
                 <div className="row justify-content-center">
                     <div className="row">
                         <div className="col">
@@ -51,26 +52,34 @@ export let Register=()=>
                             className="form-control"/>
                         </div>
                         <div className="col">
-                            <label className="form-label">CustomerName</label>
+                            <label className="form-label">CustomerBikeNo</label>
                             <input type="text"
-                            name="cusName"
+                            name="cusBikeno"
                             onChange={track}
-                            value={process.cusName}
+                            value={process.cusBikeno}
                             className="form-control"/>
 
                         </div>
                     </div>
                 </div>
                 <div className="mt-3">
-                    <label className="form-label">CustomerContact</label>
-                    <input type="tel"
-                    name="cusContact"
+                    <label className="form-label">CustomerName</label>
+                    <input type="text"
+                    name="cusName"
                     onChange={track}
-                    value={process.cusContact}
+                    value={process.cusName}
                     className="form-control"/>
                 </div>
                 <div className="mt-3">
-                    <label className="foem-label">CustomerEmail</label>
+                    <label className="foem-label">CustomerContactNo</label>
+                    <input type="tel"
+                    name="cusContact"
+                    value={process.cusContact}
+                    onChange={track}
+                    className="form-control" />
+                </div>
+                <div className="mt-3">
+                    <label className="form-label">CustomerEmail</label>
                     <input type="email"
                     name="cusEmail"
                     value={process.cusEmail}
