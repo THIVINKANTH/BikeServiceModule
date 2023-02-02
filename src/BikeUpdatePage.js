@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from 'react'
 import { alert1 } from './BikeDetailsvalues'
+import './Image.css'
 export let Updating=(myvalue)=>
 {
     const[pos,setPos]=useState(myvalue.who)

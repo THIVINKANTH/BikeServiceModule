@@ -38,8 +38,16 @@ export const Login=()=>
                         <input type="password" onChange={onPerform} value={user.password} name="password" placeholder="Password please" className="form-control"/>
                     </div>
                     <div className="row justify-content-around mt-3">
-                        <button className="col-3 btn btn-outline-primary" onClick={async()=>{
-
+                        <button className="col-3 btn btn-outline-primary" onClick={()=>
+                        {
+                            if(user.username==="THIVIN" && user.password==="579912")
+                            {
+                                sessionStorage.setItem("auth",user.username)
+                                window.location.assign("/")
+                            }
+                            else{
+                                alert("invalid values")
+                            }
                         }}>
                             Login
                         </button>

@@ -3,6 +3,7 @@ import { Register } from "./BikeServiceForm";
 import { Home } from "./HomePage";
 import { ListallbikeDetails } from "./ListallBikeValues";
 import { ListallbServiceDetails } from "./ListallServiceDetails";
+import { Login } from "./LoginPage";
 import { Newservicedetails } from "./NewserviceDetails";
 
 
@@ -10,7 +11,10 @@ import { Newservicedetails } from "./NewserviceDetails";
 function App() {
   return (
     <>
-    <BrowserRouter>
+    {
+      (sessionStorage.getItem("auth"))?
+      <>
+      <BrowserRouter>
     <Home/>
     <Routes>
       <Route path="createbikedetails" exact element={<Register/>}/>
@@ -19,6 +23,12 @@ function App() {
       <Route path="listallservicedetails" exact element={<ListallbServiceDetails/>}/>
     </Routes>
     </BrowserRouter>
+      </>
+      :
+      <>
+      <Login/>
+      </>
+    }
     </>
   );
 }

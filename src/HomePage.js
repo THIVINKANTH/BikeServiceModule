@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-
+import './Image.css'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 export const Home=()=>
 {
     return(
         <>
         <div id="bc1">
-            <Navbar expand="lg" variant="dark">
+            <Navbar expand="lg" variant="dark" className="bg-primary">
                 <Container>
                     <Navbar.Brand href="/" className="">Zealous ServiceCenter</Navbar.Brand>
                     <Navbar.Toggle aria-controls="thivin"/>
@@ -22,7 +22,11 @@ export const Home=()=>
                             </NavDropdown>
                         </Nav>
                         <Nav className="ms-5">
-                            <button className="btn btn-outline-dark me-5">
+                            <button className="btn btn-outline-dark me-5" onClick={()=>
+                            {
+                                sessionStorage.removeItem("auth");
+                                window.location.assign("/")
+                            }}>
                                 Logout
                             </button>
                         </Nav>
