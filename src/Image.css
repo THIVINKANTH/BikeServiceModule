@@ -9,3 +9,19 @@
     color: transparent;
     text-decoration: underline red;
 }
+#bc1
+{
+    background-color: orangered;
+}
+#texting
+{
+    color: blue;
+    font-family: cursive;
+    font-style: italic;
+}
+#servicebg
+{
+    background-image: linear-gradient(blue,rgb(236, 5, 236));
+    -webkit-background-clip: text;
+    color: transparent;
+}
