@@ -1,23 +1,23 @@
 import { useState } from "react"
+import { createservicedetails, readbikenumber } from "./Connect"
 
 
 export const Newservicedetails=()=>
 {
+
     const[process,setProcess]=useState({
         "bikeJobcardno":0,
-        "bikeIssues":new Array(),
+        "bikeIssuse":[],
         "bikeDateofservice":"",
         "bikeKilometer":0,
         "bikeStatus":"",
-        "bikeTypeofsevice":"",
+        "bikeTypeofservice":"",
         "bikeEstimatecharge":0,
         "bikeNewproductcost":0,
         "bikeLabourcharge":0,
+        "bikeFinalamount":0,
+        "bikeDetails1":""
     })
-    const regis=()=>
-    {
-        alert("Welcome to BikeServicedetails Process"+JSON.stringify(process));
-    }
     const track=(data)=>
     {
         const{name,value}=data.target
@@ -31,6 +31,29 @@ export const Newservicedetails=()=>
             }
         )
     }
+
+    const[issues,setIssues]=useState("");
+   
+    const tracking=(myvalues)=>
+    {
+        setIssues(myvalues.target.value)
+    }
+    const regis=async()=>
+    {
+        // alert("Welcome to BikeServicedetails Process"+JSON.stringify(process));
+        const bikenumber=await readbikenumber(process.bikeDetails1);
+        process.bikeDetails1=bikenumber.data;
+        process.bikeIssues=issues.split(",");
+        const t=await createservicedetails(process);
+
+        alert(t.data);
+        // navi("/")
+    }
+    const reset=()=>
+    {
+        alert('Rejected.....!')
+    }
+    
     return(
         <>
         <div id="servicebg">
@@ -55,13 +78,13 @@ export const Newservicedetails=()=>
                             className="form-control"
                             placeholder="problems"
                             onChange={track}
-                            value={process.bikeIssues}
-                            name="bikeIssues"
+                            value={process.bikeIssuse}
+                            name="bikeIssuse"
                             />
                         </div>
                         <div className="form-group">
                             <label>BikeDateofservice</label>
-                            <input type="text"
+                            <input type="date"
                             className="form-control"
                             placeholder="yyyy-mm-dd"
                             onChange={track}
@@ -95,8 +118,8 @@ export const Newservicedetails=()=>
                             className="form-control"
                             placeholder="Paid/Free"
                             onChange={track}
-                            value={process.bikeTypeofsevice}
-                            name="BikeTypeofsevice"
+                            value={issues.bikeTypeofservice}
+                            name="bikeTypeofservice"
                             />
                         </div>
                         <div className="form-group">
@@ -129,12 +152,33 @@ export const Newservicedetails=()=>
                             name="bikeLabourcharge"
                             />
                         </div>
-                        <div className="mt-3 row justify-contant-around">
-                            <button className="btn btn-outline-info col-2" onClick={regis}>
+                        <div className="form-group">
+                            <label>BikeFinalAmount</label>
+                            <input type="number"
+                            className="form-control"
+                            placeholder="Salary for employe"
+                            onChange={track}
+                            value={process.bikeFinalamount}
+                            name="bikeFinalamount"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>BikeDetails</label>
+                            <input type="text"
+                            className="form-control"
+                            placeholder="Enter bike number"
+                            onChange={track}
+                            value={process.bikeDetails1}
+                            name="bikeDetails1"
+                            />
+                        </div>
+                        <div className="mt-3 row justify-content-around">
+                            <button className="btn btn-outline-info col-4" onClick={regis} type="submit" value="Register">
                                 Add ServiceDetails
+                                <i className="bi bi-database-add"></i>
                             </button>
-                            <button className="btn btn-outline-dark col-2" type="reset" value="Cancel">
-                                Cancelled ServiceDetails
+                            <button className=" btn btn-outline-dark col-4" onClick={reset} type="reset" value="Cancel">
+                                Cancelled ServiceDetails <i className="bi bi-x-octagon-fill"></i>
                             </button>
                         </div>
                     </div>

@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Reading } from "./BikeReadPage";
 import { Register } from "./BikeServiceForm";
+import { Updating } from "./BikeUpdatePage";
 import { Home } from "./HomePage";
 import { ListallbikeDetails } from "./ListallBikeValues";
 import { ListallbServiceDetails } from "./ListallServiceDetails";
@@ -21,6 +23,8 @@ function App() {
       <Route path="listallbikedetails" exact element={<ListallbikeDetails/>}/>
       <Route path="createservicedetails" exact element={<Newservicedetails/>}/>
       <Route path="listallservicedetails" exact element={<ListallbServiceDetails/>}/>
+      <Route path="reading/:myid" exact element={<Reading/>}/>
+      <Route path="updating/:myid" exact element={<Updating/>}/>
     </Routes>
     </BrowserRouter>
       </>

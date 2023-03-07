@@ -1,22 +1,27 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useEffect, useState } from 'react'
-import { read } from './BikeDetailsvalues'
-export const Reading=(myvalue)=>
+import { useParams } from 'react-router-dom'
+import { readonebikevalue } from './Connect'
+export const Reading=()=>
 {
-    const[bikevalue,setBikevalue]=useState({
-        "cusId":"",
-        "cusName":"",
-        "cusContact":"",
-        "cusEmail":"",
-        "cusDate":""
-    })
+    // const[bikevalue,setBikevalue]=useState({
+    //     "cusId":"",
+    //     "cusName":"",
+    //     "cusContact":"",
+    //     "cusEmail":"",
+    //     "cusDate":""
+    // })
+    const {myid}=useParams();
+    const[bikevalue,setBikevalue]=useState({})
     useEffect(()=>
     {
         callreading()
     })
-    const callreading=()=>
+    const callreading=async()=>
     {
-        setBikevalue(read(myvalue.who))
+        // setBikevalue(read(myvalue.who))
+        const t=await readonebikevalue(myid);
+        setBikevalue(t.data);
     }
     return(
         <>
@@ -28,9 +33,9 @@ export const Reading=(myvalue)=>
                     </div>
                     <div className="card-body">
                         <p>{bikevalue.cusId}</p>
-                        <p>{bikevalue.cusContact}</p>
+                        <p>{bikevalue.cusContactno}</p>
                         <p>{bikevalue.cusEmail}</p>
-                        <p>{bikevalue.cusDate}</p>
+                        <p>{bikevalue.cusDateofpurchase}</p>
                     </div>
                 </div>
             </div>

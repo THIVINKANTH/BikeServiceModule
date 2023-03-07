@@ -1,17 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState } from 'react'
-import { create } from './BikeDetailsvalues'
+import { useNavigate } from 'react-router-dom'
+import { CreatebikeDetails } from './Connect'
 import './Image.css'
 
 export let Register=()=>
 {
+    const navi=useNavigate();
     const[process,setProcess]=useState({
         "cusId":0,
         "cusBikeno":"",
         "cusName":"",
-        "cusContact":"",
+        "cusContactno":"",
         "cusEmail":"",
-        "Dateofpurchase":""
+        "cusDateofpurchase":""
     })
     const track=(data)=>
     {
@@ -26,10 +28,13 @@ export let Register=()=>
             }
         )
     }
-    const register=()=>
+    const register=async()=>
     {
-        alert('Welcome to Zealous Service Center'+JSON.stringify(process))
-        create(process);
+        // alert('Welcome to Zealous Service Center'+JSON.stringify(process))
+        // create(process);
+        const temp=await CreatebikeDetails(process);
+        alert(temp.data);
+        navi("/listallbikedetails")
     }
     const reset=()=>
     {
@@ -71,10 +76,10 @@ export let Register=()=>
                     className="form-control"/>
                 </div>
                 <div className="mt-3">
-                    <label className="foem-label">CustomerContactNo</label>
+                    <label className="form-label">CustomerContactNo</label>
                     <input type="tel"
-                    name="cusContact"
-                    value={process.cusContact}
+                    name="cusContactno"
+                    value={process.cusContactno}
                     onChange={track}
                     className="form-control" />
                 </div>
@@ -89,7 +94,7 @@ export let Register=()=>
                 <div className="mt-3">
                     <label className="form-label">DateofPurchase</label>
                     <input type="date"
-                    name="cusDate"
+                    name="cusDateofpurchase"
                     value={process.cusDate}
                     onChange={track}
                     className="form-control" />

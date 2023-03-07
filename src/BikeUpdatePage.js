@@ -1,17 +1,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState } from 'react'
-import { alert1 } from './BikeDetailsvalues'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { readonebikevalue, updatebikevalue } from './Connect'
 import './Image.css'
-export let Updating=(myvalue)=>
+export let Updating=()=>
 {
-    const[pos,setPos]=useState(myvalue.who)
-    const[process,setProcess]=useState({
-        "cusId":myvalue.mention.cusId,
-        "cusName":myvalue.mention.cusName,
-        "cusContact":myvalue.mention.cusContact,
-        "cusEmail":myvalue.mention.cusEmail,
-        "cusDate":myvalue.mention.cusDate
-    })
+    // const[pos,setPos]=useState(myvalue.who)
+    // const[process,setProcess]=useState({
+    //     "cusId":myvalue.mention.cusId,
+    //     "cusName":myvalue.mention.cusName,
+    //     "cusContact":myvalue.mention.cusContact,
+    //     "cusEmail":myvalue.mention.cusEmail,
+    //     "cusDate":myvalue.mention.cusDate
+    // })
+    const {myid}=useParams()
+    const navi=useNavigate()
+    const[process,setProcess]=useState({})
+
     const track=(data)=>
     {
         const{name,value}=data.target
@@ -25,10 +30,23 @@ export let Updating=(myvalue)=>
             }
         )
     }
-    const register=()=>
+    useEffect(()=>
     {
-        alert1(process,pos)
-        alert1("Your value is Updated successfully")
+        callreading()
+    })
+
+    const callreading=async()=>
+    {
+        const t=await readonebikevalue(myid);
+        setProcess(t.data);
+    }
+    const register=async()=>
+    {
+        // alert1(process,pos)
+        // alert1("Your value is Updated successfully")
+        const t=await updatebikevalue(process);
+        alert(t.data);
+        navi("/listallbikedetails")
     }
     const reset=()=>
     {
@@ -63,9 +81,9 @@ export let Updating=(myvalue)=>
                     <div className="mt-3">
                         <label className="form-label">CustomerContact</label>
                         <input type="tel"
-                        name="cusContact"
+                        name="cusContactno"
                         onChange={track}
-                        value={process.cusContact}
+                        value={process.cusContactno}
                         className="form-control" />
                     </div>
                     <div className="mt-3">
@@ -79,9 +97,9 @@ export let Updating=(myvalue)=>
                     <div className="mt-3">
                         <label className="form-label">DateofPurchase</label>
                         <input type="date"
-                        name="cusDate"
+                        name="cusDateofpurchase"
                         onChange={track}
-                        value={process.cusDate}
+                        value={process.cusDateofpurchase}
                         className="form-control" />
                     </div>
                     <div className="row justify-content-around mt-4">

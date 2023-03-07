@@ -1,6 +1,23 @@
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { deletebybikedetails, DisplayAllbikevalues } from './Connect'
 import './Image.css'
 export const ListallbikeDetails=()=>
 {
+    const navi=useNavigate()
+    const[allvalues,setAllvalues]=useState([])
+    
+    const myvalues=async()=>
+    {
+        const t=await DisplayAllbikevalues();
+        setAllvalues(t.data);
+    }
+
+    useEffect(()=>
+    {
+        myvalues()
+    })
     return(
         <>
         <div className="container mt-5 bg-warning">
@@ -19,7 +36,32 @@ export const ListallbikeDetails=()=>
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            {
+                                allvalues.map((data)=>(
+                                    <tr>
+                                        <td>
+                                            <a href={`reading/${data.cusId}`} className="btn btn-outline-primary">{data.cusId}</a>
+                                        </td>
+                                        <td>{data.cusId}</td>
+                                        <td>{data.cusBikeno}</td>
+                                        <td>{data.cusName}</td>
+                                        <td>{data.cusContactno}</td>
+                                        <td>{data.cusEmail}</td>
+                                        <td>{data.cusDateofpurchase}</td>
+                                        <td>
+                                            <a href={`updating/${data.cusId}`} className="btn btn-outline-primary">Update</a>
+                                            <button className="btn btn-outline-danger"
+                                            onClick={
+                                                async()=>{
+                                                    const temp=await deletebybikedetails(data.cusId)
+                                                    alert(temp.data);
+                                                    navi("/listallbikedetails")
+                                                }
+                                            }>Delete</button>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
                         </tbody>
                     </table>
                 </div>
